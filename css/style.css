@@ -26,14 +26,13 @@ Custom Properties
 
 @media (min-width: 25em) {
   :root {
-    --fs-300: 1rem;
     --fs-600: 1.75rem;
   }
 }
 
 @media (min-width: 45em) {
   :root {
-    --fs-300: 1rem;
+    --fs-300: 0.875rem;
     --fs-600: 2.25rem;
   }
 }
@@ -278,28 +277,113 @@ h3 {
 
 .primary {
   --gap: 0;
-  background: yellow;
+  position: relative;
 }
 
 .primary-details {
-  background: red;
-  padding: clamp(3rem, 5vw, 4rem);
+  z-index: 1;
   flex-direction: column;
   justify-content: center;
+  padding: clamp(3rem, 4vw, 4rem);
 }
 
 .primary-details a {
   display: inline-block;
   text-decoration: none;
   letter-spacing: 4px;
+  align-items: center;
+}
+
+.primary-details a:hover,
+.primary-details a:hover svg path {
+  color: hsl(var(--clr-light));
+  fill: hsl(var(--clr-light));
+}
+
+.primary-details a span {
+  margin-left: 1rem;
+}
+
+.secondary {
+  --gap: 0;
+}
+
+.secondary-details {
+  padding: 3.5rem;
+}
+
+.top {
+  position: relative;
+}
+
+.slider-controls {
+  --gap: 0;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.slider-controls button {
+  border: none;
+  padding: 1rem 1.25rem;
+}
+
+.slider-controls button:hover {
+  background-color: hsl(var(--clr-light));
 }
 
 @media (min-width: 52em) {
   .primary {
-    grid-template-columns: 1.5fr 1fr;
+    grid-template-columns: repeat(12, 1fr);
   }
 
-  .hero-image {
-    width: 100%;
+  .primary .top {
+    grid-column: 1/-1;
+    grid-row: 1/2;
+  }
+
+  .primary-details {
+    grid-column: 8/-1;
+    grid-row: 1/2;
+    align-self: end;
+    justify-self: end;
+  }
+
+  .secondary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .secondary > *:last-child {
+    grid-column: span 2;
+  }
+
+  .slider-controls {
+    left: 0;
+  }
+}
+
+@media (min-width: 63em) {
+  .primary .top {
+    grid-column: 1/8;
+  }
+
+  .primary-details {
+    --flow-space: 2rem;
+    align-self: stretch;
+  }
+
+  .secondary {
+    grid-template-columns: 1fr 2fr 1fr;
+  }
+
+  .secondary > *:last-child {
+    grid-column: span 1;
+  }
+
+  .slider-controls {
+    right: 0;
+    left: auto;
+    transform: translateX(100%);
   }
 }
